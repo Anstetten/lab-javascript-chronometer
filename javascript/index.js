@@ -93,7 +93,7 @@ btnRightElement.addEventListener('click', () => {
     chronometer.reset();
     //to reset display
     printTime("00","00");
-    //delete splits
+    //delete splits  
     splitsElement.innerHTML="";
   }
 
