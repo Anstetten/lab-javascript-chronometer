@@ -91,12 +91,14 @@ btnRightElement.addEventListener('click', () => {
   if (btnRightElement.classList.contains("reset")){
 
     chronometer.reset();
+    //to reset display
     printTime("00","00");
+    //delete splits
     splitsElement.innerHTML="";
   }
 
   else{
-
+    //to log splits
     let newSplit =document.createElement('li');
     newSplit.innerText=chronometer.split();
     splitsElement.appendChild(newSplit);
