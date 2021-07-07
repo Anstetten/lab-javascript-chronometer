@@ -7,11 +7,12 @@ class Chronometer {
   start() {
     this.intervalId=setInterval(()=>{
       
-      this.currentTime+=1;
+      this.currentTime+=0.01;
       let minutesTwoDigit=this.computeTwoDigitNumber(this.getMinutes());
       let secondsTwoDigit=this.computeTwoDigitNumber(this.getSeconds());
-      printTime(minutesTwoDigit,secondsTwoDigit);
-    },1000);
+      let milliSecondsTwoDigit=this.computeTwoDigitNumber(this.getMilliSeconds());
+      printTime(minutesTwoDigit,secondsTwoDigit,milliSecondsTwoDigit);
+    },10);
   }
 
   getMinutes() {
@@ -19,7 +20,12 @@ class Chronometer {
   }
 
   getSeconds() {
-    return this.currentTime%60;
+    return Math.floor(this.currentTime%60);
+  }
+
+  getMilliSeconds() {
+    let milliSecondsToTwoDecimals= Math.floor((this.currentTime%1*100));
+    return milliSecondsToTwoDecimals;
   }
 
   computeTwoDigitNumber(value) {
@@ -38,8 +44,9 @@ class Chronometer {
   split() {
     let minutes= this.computeTwoDigitNumber(this.getMinutes());
     let seconds= this.computeTwoDigitNumber(this.getSeconds());
+    let milliSeconds= this.computeTwoDigitNumber(this.getMilliSeconds());
 
-    return minutes+":"+seconds;
+    return minutes+":"+seconds+":"+milliSeconds;
   }
 }
 

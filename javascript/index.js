@@ -13,10 +13,11 @@ const milDecElement = document.getElementById('milDec');
 const milUniElement = document.getElementById('milUni');
 const splitsElement = document.getElementById('splits');
 
-function printTime(minutes, seconds) {
+function printTime(minutes, seconds, milliSeconds) {
   // ... your code goes here
   printMinutes(minutes);
   printSeconds(seconds);
+  printMilliseconds(milliSeconds);
 }
 
 function printMinutes(minutes) {
@@ -30,53 +31,60 @@ function printSeconds(seconds) {
   secUniElement.innerHTML=seconds[1];
 }
 
-// ==> BONUS
-function printMilliseconds() {
+function printMilliseconds(milliSeconds) {
   // ... your code goes here
+  console.log(milliSeconds);
+  milDecElement.innerHTML=milliSeconds[0];
+  milUniElement.innerHTML=milliSeconds[1];
 }
 
+
 function printSplit() {
-  // ... your code goes here
+  
+  let newSplit =document.createElement('li');
+  newSplit.innerText=chronometer.split();
+  splitsElement.appendChild(newSplit);
 }
 
 function clearSplits() {
-  // ... your code goes here
+    chronometer.reset();
+    //to reset display
+    printTime("00","00","00");
+    //delete splits  
+    splitsElement.innerHTML="";
 }
 
 function setStopBtn() {
   // ... your code goes here
+  btnLeftElement.innerText="STOP";
 }
 
 function setSplitBtn() {
-  // ... your code goes here
+  btnRightElement.innerText="SPLIT";
 }
 
 function setStartBtn() {
-  // ... your code goes here
+  btnLeftElement.innerText="START";
 }
 
 function setResetBtn() {
-  // ... your code goes here
+  btnRightElement.innerText="RESET"
 }
 
 // Start/Stop Button
 btnLeftElement.addEventListener('click', () => {
   if (btnLeftElement.classList.contains("start")){
-
     //Changing Texts of buttons
-    btnLeftElement.innerText="STOP"
-    btnRightElement.innerText="SPLIT"
+    setStopBtn();
+    setSplitBtn();
     chronometer.start();
-    
   }
 
   else{
-
     //Changing Texts of buttons
-    btnLeftElement.innerText="START"
-    btnRightElement.innerText="RESET"
+    setStartBtn();
+    setResetBtn();
     chronometer.stop();
-
   }
 
     //Toggling states of buttons
@@ -89,19 +97,10 @@ btnLeftElement.addEventListener('click', () => {
 // Reset/Split Button
 btnRightElement.addEventListener('click', () => {
   if (btnRightElement.classList.contains("reset")){
-
-    chronometer.reset();
-    //to reset display
-    printTime("00","00");
-    //delete splits  
-    splitsElement.innerHTML="";
+    clearSplits();
   }
 
   else{
-    //to log splits
-    let newSplit =document.createElement('li');
-    newSplit.innerText=chronometer.split();
-    splitsElement.appendChild(newSplit);
-
+    printSplit();  
   }
 });
