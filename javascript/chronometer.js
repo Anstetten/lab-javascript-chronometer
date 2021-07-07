@@ -4,9 +4,13 @@ class Chronometer {
     this.intervalId = null;
   }
 
-  start(callback) {
+  start() {
     this.intervalId=setInterval(()=>{
+      
       this.currentTime+=1;
+      let minutesTwoDigit=this.computeTwoDigitNumber(this.getMinutes());
+      let secondsTwoDigit=this.computeTwoDigitNumber(this.getSeconds());
+      printTime(minutesTwoDigit,secondsTwoDigit);
     },1000);
   }
 

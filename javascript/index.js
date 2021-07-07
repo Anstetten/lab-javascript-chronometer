@@ -13,16 +13,21 @@ const milDecElement = document.getElementById('milDec');
 const milUniElement = document.getElementById('milUni');
 const splitsElement = document.getElementById('splits');
 
-function printTime() {
+function printTime(minutes, seconds) {
   // ... your code goes here
+  printMinutes(minutes);
+  printSeconds(seconds);
 }
 
-function printMinutes() {
-  // ... your code goes here
+function printMinutes(minutes) {
+  minDecElement.innerHTML=minutes[0];
+  minUniElement.innerHTML=minutes[1];
 }
 
-function printSeconds() {
+function printSeconds(seconds) {
   // ... your code goes here
+  secDecElement.innerHTML=seconds[0];
+  secUniElement.innerHTML=seconds[1];
 }
 
 // ==> BONUS
@@ -56,7 +61,29 @@ function setResetBtn() {
 
 // Start/Stop Button
 btnLeftElement.addEventListener('click', () => {
-  // ... your code goes here
+  if (btnLeftElement.classList.contains("start")){
+
+    //Changing Texts of buttons
+    btnLeftElement.innerText="STOP"
+    btnRightElement.innerText="SPLIT"
+    chronometer.start();
+    
+  }
+
+  else{
+
+    //Changing Texts of buttons
+    btnLeftElement.innerText="START"
+    btnRightElement.innerText="RESET"
+    chronometer.stop();
+
+  }
+
+    //Toggling states of buttons
+    btnRightElement.classList.toggle("reset");
+    btnRightElement.classList.toggle("split");
+    btnLeftElement.classList.toggle("start");
+    btnLeftElement.classList.toggle("stop");
 });
 
 // Reset/Split Button
